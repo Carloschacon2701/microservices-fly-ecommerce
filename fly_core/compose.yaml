@@ -1,0 +1,14 @@
+services:
+  mysql:
+    image: mysql:latest
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./conf:/etc/mysql/conf.d
+    environment:
+      - MYSQL_DATABASE=mydatabase
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=verysecret
+      - MYSQL_USER=myuser
+    ports:
+      - 33063:3306
+    restart: always

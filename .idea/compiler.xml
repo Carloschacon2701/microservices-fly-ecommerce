@@ -10,12 +10,12 @@
         <module name="api-gateway" />
         <module name="chat-service" />
         <module name="Server" />
-        <module name="fly-core" />
         <module name="fly_core" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="fly-commerce" target="17" />
+      <module name="fly-core" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
