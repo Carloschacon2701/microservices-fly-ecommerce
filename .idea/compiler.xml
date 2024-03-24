@@ -10,6 +10,7 @@
         <module name="api-gateway" />
         <module name="chat-service" />
         <module name="Server" />
+        <module name="Auth-service" />
         <module name="fly_core" />
       </profile>
     </annotationProcessing>
@@ -20,6 +21,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Auth-service" options="-parameters" />
       <module name="Server" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
       <module name="chat-service" options="-parameters" />
