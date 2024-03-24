@@ -1,6 +1,6 @@
 spring:
   application:
-    name: fly_core
+    name: fly-core
 
   datasource:
       driver-class-name: com.mysql.jdbc.Driver

@@ -3,7 +3,7 @@ package org.carlos.chatservice.Controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.carlos.chatservice.Models.UserMongo;
-import org.carlos.chatservice.OpenFeing.FlyCommerceInterface;
+import org.carlos.chatservice.OpenFeing.FlyCoreInterface;
 import org.carlos.chatservice.Services.UserChatService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserChatController {
     private final UserChatService userChatService;
-    private final FlyCommerceInterface flyCommerceInterface;
+    private final FlyCoreInterface flyCommerceInterface;
 
     @MessageMapping("/user.addUser")
     @SendTo("/user/topic")
