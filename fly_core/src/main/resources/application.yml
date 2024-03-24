@@ -3,13 +3,14 @@ spring:
     name: fly-core
 
   datasource:
-      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://localhost:33063/mydatabase
       username: myuser
       password: secret
+
   jpa:
       hibernate:
-        ddl-auto: create-drop
+        ddl-auto: update
       show-sql: true
       properties:
         hibernate:
