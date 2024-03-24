@@ -11,6 +11,7 @@
         <module name="chat-service" />
         <module name="Server" />
         <module name="fly-core" />
+        <module name="fly_core" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -24,6 +25,7 @@
       <module name="chat-service" options="-parameters" />
       <module name="fly-commerce" options="-parameters" />
       <module name="fly-core" options="-parameters" />
+      <module name="fly_core" options="-parameters" />
     </option>
   </component>
 </project>

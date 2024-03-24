@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/Server/pom.xml" />
         <option value="$PROJECT_DIR$/Fly/pom.xml" />
         <option value="$PROJECT_DIR$/fly-core/pom.xml" />
+        <option value="$PROJECT_DIR$/fly_core/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />
