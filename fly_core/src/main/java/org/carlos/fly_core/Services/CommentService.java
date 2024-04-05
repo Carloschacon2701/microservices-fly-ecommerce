@@ -2,6 +2,8 @@ package org.carlos.fly_core.Services;
 
 import lombok.RequiredArgsConstructor;
 import org.carlos.fly_core.DTO.Comment.CommentCreationDTO;
+import org.carlos.fly_core.DTO.Comment.CommentDTO;
+import org.carlos.fly_core.DTO.Comment.CommentDTOMapper;
 import org.carlos.fly_core.DTO.Comment.CommentUpdateDTO;
 import org.carlos.fly_core.Models.Comment;
 import org.carlos.fly_core.Repository.CommentRepository;
@@ -15,8 +17,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CommentService {
     private final CommentRepository commentRepository;
+    private final CommentDTOMapper commentDTOMapper;
     private final UserRepository userRepository;
     private final HotelRepository hotelRepository;
+
+    public CommentDTO convertToDTO(Comment comment) {
+        return commentDTOMapper.apply(comment);
+    }
+
 
     public void deleteComment(Integer id) {
         commentRepository.deleteById(id);
@@ -26,11 +34,12 @@ public class CommentService {
         return commentRepository.findAllByHotel_Id(hotel_id);
     }
 
-    public List<Comment> getCommentsByUserAndHotel(Integer user_id, Integer hotel_id) {
-        return commentRepository.findAllByUser_IdAndHotel_Id(user_id, hotel_id);
+    public List<CommentDTO> getCommentsByUserAndHotel(Integer user_id, Integer hotel_id) {
+        return commentRepository.findAllByUser_IdAndHotel_Id(user_id, hotel_id)
+                .stream().map(commentDTOMapper).toList();
     }
 
-    public Comment createComment(CommentCreationDTO comment) {
+    public CommentDTO createComment(CommentCreationDTO comment) {
         var User = userRepository.findById(comment.getUser_id());
         var Hotel = hotelRepository.findById(comment.getHotel_id());
 
@@ -38,22 +47,29 @@ public class CommentService {
             throw new RuntimeException("User or Hotel not found");
         }
 
-        return commentRepository.save(Comment.builder()
+        Comment newComment =  commentRepository.save(Comment.builder()
                 .comment(comment.getComment())
                 .rating(comment.getRating())
                 .user(User.get())
                 .hotel(Hotel.get())
                 .build());
+
+        return convertToDTO(newComment);
     }
 
-    public Comment updateComment(Integer id, CommentUpdateDTO comment) {
+    public CommentDTO updateComment(Integer id, CommentUpdateDTO comment) {
         var Comment = commentRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Comment not found")
         );
 
-        Comment.setComment(comment.getComment());
-        Comment.setRating(comment.getRating());
+        if(comment.getComment() != null){
+            Comment.setComment(comment.getComment());
+        }
 
-        return commentRepository.save(Comment);
+        if(comment.getRating() != null){
+            Comment.setRating(comment.getRating());
+        }
+
+        return convertToDTO(commentRepository.save(Comment));
     }
 }

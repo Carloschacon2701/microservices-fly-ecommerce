@@ -15,8 +15,6 @@ import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
-import static org.springframework.http.HttpStatus.UNAUTHORIZED;
-
 @RefreshScope
 @Component
 public class AuthenticationFilter implements GatewayFilter {
@@ -35,7 +33,7 @@ public class AuthenticationFilter implements GatewayFilter {
         if (validator.isSecured.test(request)) {
             if (authMissing(request)) {
                 System.out.println("Auth missing");
-                return onError(exchange, UNAUTHORIZED);
+                return onError(exchange);
             }
 
             final String token = request.getHeaders().getOrEmpty("Authorization").get(0);
@@ -44,21 +42,21 @@ public class AuthenticationFilter implements GatewayFilter {
                 claims = jwtUtils.getClaims(token);
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
-                return onError(exchange, UNAUTHORIZED);
+                return onError(exchange);
             }
 
             if (claims.isEmpty()) {
                 System.out.println("Claims empty");
-                return onError(exchange, UNAUTHORIZED);
+                return onError(exchange);
             }
         }
 
         return chain.filter(exchange);
     }
 
-    private Mono<Void> onError(ServerWebExchange exchange, HttpStatus httpStatus) {
+    private Mono<Void> onError(ServerWebExchange exchange) {
         ServerHttpResponse response = exchange.getResponse();
-        response.setStatusCode(httpStatus);
+        response.setStatusCode(HttpStatus.UNAUTHORIZED);
         return response.setComplete();
     }
 

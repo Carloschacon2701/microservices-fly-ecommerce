@@ -3,6 +3,7 @@ package org.carlos.fly_core.Controllers;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.carlos.fly_core.DTO.Comment.CommentCreationDTO;
+import org.carlos.fly_core.DTO.Comment.CommentDTO;
 import org.carlos.fly_core.DTO.Comment.CommentUpdateDTO;
 import org.carlos.fly_core.Models.Comment;
 import org.carlos.fly_core.Services.CommentService;
@@ -24,19 +25,19 @@ public class CommentController {
     }
 
     @GetMapping("/hotel/{hotel_id}/user/{user_id}")
-    public ResponseEntity<List<Comment>> getCommentsByHotelAndUser(@PathVariable Integer hotel_id, @PathVariable Integer user_id) {
+    public ResponseEntity<List<CommentDTO>> getCommentsByHotelAndUser(@PathVariable Integer hotel_id, @PathVariable Integer user_id) {
         return ResponseEntity.ok(commentService.getCommentsByUserAndHotel(user_id, hotel_id));
     }
 
     @PostMapping
-    public ResponseEntity<Comment> createComment(
+    public ResponseEntity<CommentDTO> createComment(
             @RequestBody @Valid CommentCreationDTO comment
     ) {
         return ResponseEntity.ok(commentService.createComment(comment));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Comment> updateComment(
+    public ResponseEntity<CommentDTO> updateComment(
             @PathVariable Integer id,
             @RequestBody CommentUpdateDTO comment
     ) {
