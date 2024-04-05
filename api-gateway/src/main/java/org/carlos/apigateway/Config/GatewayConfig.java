@@ -20,10 +20,10 @@ public class GatewayConfig {
                         .filters(f -> f.filter(authenticationFilter))
                         .uri("lb://chat-service")
                 )
-                .route("fly_core", r -> r.path("/fly-core/**")
-                        .filters(f -> f.filter(authenticationFilter))
-                        .uri("lb://fly_core")
-                )
+//                .route("fly_core", r -> r.path("/fly-core/**")
+//                        .filters(f -> f.filter(authenticationFilter))
+//                        .uri("lb://fly_core")
+//                )
                 .build();
     }
 }

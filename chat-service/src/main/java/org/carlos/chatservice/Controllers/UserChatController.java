@@ -41,12 +41,12 @@ public class UserChatController {
         System.out.println("Topic");
     }
 
-    @GetMapping("/api/chat/users")
+    @GetMapping("/socket/chat/users")
     public ResponseEntity<List<UserMongo>> findConnectedUsers() {
         return ResponseEntity.ok(userChatService.getOnlineUsers());
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/socket/users/{id}")
     public ResponseEntity<?> getUser(
             @PathVariable Integer id
     ) {

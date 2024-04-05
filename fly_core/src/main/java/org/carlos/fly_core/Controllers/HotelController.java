@@ -1,13 +1,12 @@
 package org.carlos.fly_core.Controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.carlos.fly_core.DTO.Hotel.CreateHotelDTO;
 import org.carlos.fly_core.Models.Hotel;
 import org.carlos.fly_core.Services.HotelService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class HotelController {
     public ResponseEntity<List<Hotel>> getHotelsByCity(
             @PathVariable Integer city_id
     ) {
-        try{
+        try {
             return ResponseEntity.ok(hotelService.getHotelsByCity(city_id));
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
@@ -51,6 +50,14 @@ public class HotelController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PostMapping("/create")
+    public ResponseEntity<Hotel> createHotel(
+            @RequestBody @Valid CreateHotelDTO hotel
+    ) {
+        return ResponseEntity.ok(hotelService.createHotel(hotel));
+    }
+
 
 
 }
