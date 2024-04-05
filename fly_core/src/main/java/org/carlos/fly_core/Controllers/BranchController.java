@@ -1,5 +1,6 @@
 package org.carlos.fly_core.Controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.carlos.fly_core.DTO.Branch.BranchCreationDTO;
 import org.carlos.fly_core.Models.Branch;
@@ -18,12 +19,12 @@ public class BranchController {
     }
 
     @GetMapping("/hotel/{hotel_id}")
-    public Branch getBranchByHotel(Integer hotel_id) {
+    public Branch getBranchByHotel( @PathVariable Integer hotel_id) {
         return branchService.getBranchByHotel(hotel_id);
     }
 
     @PostMapping
-    public Branch createBranch(BranchCreationDTO branch) {
+    public Branch createBranch(@RequestBody @Valid BranchCreationDTO branch) {
         return branchService.createBranch(branch);
     }
 }

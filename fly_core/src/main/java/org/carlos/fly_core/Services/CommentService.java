@@ -2,6 +2,7 @@ package org.carlos.fly_core.Services;
 
 import lombok.RequiredArgsConstructor;
 import org.carlos.fly_core.DTO.Comment.CommentCreationDTO;
+import org.carlos.fly_core.DTO.Comment.CommentUpdateDTO;
 import org.carlos.fly_core.Models.Comment;
 import org.carlos.fly_core.Repository.CommentRepository;
 import org.carlos.fly_core.Repository.HotelRepository;
@@ -45,24 +46,14 @@ public class CommentService {
                 .build());
     }
 
-    public Comment updateComment(Integer id, CommentCreationDTO comment) {
-        var Comment = commentRepository.findById(id);
-        if (Comment.isEmpty()) {
-            throw new RuntimeException("Comment not found");
-        }
+    public Comment updateComment(Integer id, CommentUpdateDTO comment) {
+        var Comment = commentRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Comment not found")
+        );
 
-        var User = userRepository.findById(comment.getUser_id());
-        var Hotel = hotelRepository.findById(comment.getHotel_id());
+        Comment.setComment(comment.getComment());
+        Comment.setRating(comment.getRating());
 
-        if (User.isEmpty() || Hotel.isEmpty()) {
-            throw new RuntimeException("User or Hotel not found");
-        }
-
-        Comment.get().setComment(comment.getComment());
-        Comment.get().setRating(comment.getRating());
-        Comment.get().setUser(User.get());
-        Comment.get().setHotel(Hotel.get());
-
-        return commentRepository.save(Comment.get());
+        return commentRepository.save(Comment);
     }
 }

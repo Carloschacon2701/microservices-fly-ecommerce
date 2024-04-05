@@ -1,33 +1,51 @@
 package org.carlos.fly_core.Controllers;
 
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.carlos.fly_core.DTO.Comment.CommentCreationDTO;
+import org.carlos.fly_core.DTO.Comment.CommentUpdateDTO;
+import org.carlos.fly_core.Models.Comment;
+import org.carlos.fly_core.Services.CommentService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/comment")
+@RequiredArgsConstructor
 public class CommentController {
 
+    private final CommentService commentService;
+
     @GetMapping("/hotel/{hotel_id}")
-    public String getCommentsByHotel(@PathVariable  Integer hotel_id) {
-        return "Comments by hotel";
+    public ResponseEntity<List<Comment>> getCommentsByHotel(@PathVariable  Integer hotel_id) {
+        return ResponseEntity.ok(commentService.getCommentsByHotel(hotel_id));
     }
 
     @GetMapping("/hotel/{hotel_id}/user/{user_id}")
-    public String getCommentsByHotelAndUser(@PathVariable Integer hotel_id, @PathVariable Integer user_id) {
-        return "Comments by hotel and user";
+    public ResponseEntity<List<Comment>> getCommentsByHotelAndUser(@PathVariable Integer hotel_id, @PathVariable Integer user_id) {
+        return ResponseEntity.ok(commentService.getCommentsByUserAndHotel(user_id, hotel_id));
     }
 
     @PostMapping
-    public String createComment() {
-        return "Comment created";
+    public ResponseEntity<Comment> createComment(
+            @RequestBody @Valid CommentCreationDTO comment
+    ) {
+        return ResponseEntity.ok(commentService.createComment(comment));
     }
 
-    @PutMapping
-    public String updateComment() {
-        return "Comment updated";
+    @PutMapping("/{id}")
+    public ResponseEntity<Comment> updateComment(
+            @PathVariable Integer id,
+            @RequestBody CommentUpdateDTO comment
+    ) {
+        return ResponseEntity.ok(commentService.updateComment(id, comment));
     }
 
     @DeleteMapping("/{id}")
-    public String deleteComment(@PathVariable Integer id) {
-        return "Comment deleted";
+    public ResponseEntity<?> deleteComment(@PathVariable Integer id) {
+        commentService.deleteComment(id);
+        return ResponseEntity.ok("Deleted succesfully");
     }
 }
