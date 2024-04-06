@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class UserMongo {
     @Id
+    private Integer id;
     private String name;
     private StatusMongo status;
 }

@@ -24,7 +24,6 @@ public class UserChatController {
     @MessageMapping("/user.addUser")
     @SendTo("/user/topic")
     public UserMongo addUser(@Payload UserMongo user) {
-        System.out.println("User added: " + user.getName());
          userChatService.saveUser(user);
          return user;
     }
