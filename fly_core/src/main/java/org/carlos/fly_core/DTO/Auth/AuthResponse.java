@@ -3,6 +3,8 @@ package org.carlos.fly_core.DTO.Auth;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Builder;
 
 @Data
 @Builder
@@ -16,5 +18,4 @@ public class AuthResponse {
     @JsonProperty("refresh_token")
     private String refreshToken;
 
-}{
 }

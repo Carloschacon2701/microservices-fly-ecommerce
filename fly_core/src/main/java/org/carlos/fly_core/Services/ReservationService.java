@@ -5,7 +5,7 @@ import org.carlos.fly_core.DTO.Reservation.ReservationCreationDTO;
 import org.carlos.fly_core.Models.Reservation;
 import org.carlos.fly_core.Models.Room;
 import org.carlos.fly_core.Models.User;
-import org.carlos.fly_core.Repository.ReservationRepository;
+import org.carlos.fly_core.Repository.Reservation.ReservationRepository;
 import org.carlos.fly_core.Repository.RoomRepository;
 import org.carlos.fly_core.Repository.UserRepository;
 import org.springframework.stereotype.Service;

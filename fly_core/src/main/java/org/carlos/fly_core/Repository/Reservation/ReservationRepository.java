@@ -1,4 +1,4 @@
-package org.carlos.fly_core.Repository;
+package org.carlos.fly_core.Repository.Reservation;
 
 import org.carlos.fly_core.Models.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -4,6 +4,8 @@ package org.carlos.fly_core.Seed;
 import lombok.RequiredArgsConstructor;
 import org.carlos.fly_core.Models.*;
 import org.carlos.fly_core.Repository.*;
+import org.carlos.fly_core.Repository.Reservation.ReservationRepository;
+import org.carlos.fly_core.Repository.Reservation.ReservationStatusRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -61,7 +63,7 @@ public class Seed {
 
     private final Map<Integer, User> users = Map.of(
             1, User.builder()
-                    .email("Carloschacon@yopmail.com")
+                    .email("pedropica@yopmail.com")
                     .username("Carlos")
                     .dateOfBirth(new Date())
                     .role(roles.get(1))

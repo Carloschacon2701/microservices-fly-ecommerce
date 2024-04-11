@@ -3,6 +3,7 @@ package org.carlos.fly_core.DTO.Hotel;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class CreateHotelDTO {
@@ -30,5 +31,7 @@ public class CreateHotelDTO {
 
     @NotNull(message = "Stars cannot be null")
     private Integer stars;
+
+    private MultipartFile image;
 
 }

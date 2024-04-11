@@ -20,5 +20,5 @@ spring:
 application:
   security:
     cognito:
-      poolID: us-east-1_XXXXXX
-      clientID: XXXXXXX
+      poolID: us-east-2_QWtoiZGIi
+      clientID: 60ju9142ci98161a0mn83n140

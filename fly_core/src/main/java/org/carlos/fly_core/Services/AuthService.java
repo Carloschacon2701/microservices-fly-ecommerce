@@ -1,6 +1,8 @@
 package org.carlos.fly_core.Services;
 
 import lombok.RequiredArgsConstructor;
+import org.carlos.fly_core.DTO.Auth.AuthRequest;
+import org.carlos.fly_core.DTO.Auth.AuthResponse;
 import org.carlos.fly_core.DTO.Auth.UserRegister;
 import org.carlos.fly_core.DTO.User.UserDTO;
 import org.carlos.fly_core.DTO.User.UserDTOMapper;
@@ -12,6 +14,7 @@ import org.carlos.fly_core.Repository.RoleRepository;
 import org.carlos.fly_core.Repository.UserRepository;
 import org.carlos.fly_core.Security.Services.CognitoService;
 import org.springframework.stereotype.Service;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.AuthenticationResultType;
 
 @Service
 @RequiredArgsConstructor
@@ -49,10 +52,10 @@ public class AuthService {
        return userDTOMapper.apply(userRepository.save(newUser));
     }
 
-    public AuthenticationResponse initiateAuth(AuthRequest request) {
+    public AuthResponse logIn(AuthRequest request) {
         AuthenticationResultType response = cognitoService.CognitoSignIn(request.getEmail(), request.getPassword());
 
-        return AuthenticationResponse.builder()
+        return AuthResponse.builder()
                 .refreshToken(response.refreshToken())
                 .accessToken(response.accessToken())
                 .build();

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient("FLY-CORE")
 public interface FlyCoreInterface {
     @GetMapping("api/user/{id}")
-    public ResponseEntity<UserDTO> getUser(
+     ResponseEntity<UserDTO> getUser(
             @PathVariable Integer id
     );
 }
