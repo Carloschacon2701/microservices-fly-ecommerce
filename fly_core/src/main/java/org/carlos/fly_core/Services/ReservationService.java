@@ -36,8 +36,14 @@ public class ReservationService {
             reservation.getRoom_id(), reservation.getCheckIn(), reservation.getCheckOut()
         );
 
+        System.out.println(overLappingReservations);
+
         if(overLappingReservations > room.getQuantity()){
             throw new RuntimeException("Room is not available for the selected dates");
+        }
+
+        if(reservation.getAdults() + reservation.getChildren() > room.getCapacity()){
+            throw new RuntimeException("Room capacity exceeded");
         }
 
         Double total = room.getPrice() * reservation.getDays();

@@ -149,8 +149,9 @@ public class Seed {
                     .hotel(hotels.get(1))
                     .roomType(roomTypes.get(1))
                     .description("Room 1")
-                    .quantity(10)
+                    .quantity(3)
                     .price(100.0)
+                    .Capacity(2)
                     .build(),
             2, Room.builder()
                     .hotel(hotels.get(2))
@@ -158,6 +159,7 @@ public class Seed {
                     .price(200.0)
                     .description("Room 2")
                     .quantity(10)
+                    .Capacity(4)
                     .build()
     );
 
