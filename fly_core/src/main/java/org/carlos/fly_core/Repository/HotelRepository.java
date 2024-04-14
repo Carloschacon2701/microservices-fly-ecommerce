@@ -16,5 +16,7 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
     @Query("SELECT h FROM Hotel h WHERE h.city.country.id = :country_id")
     Optional<List<Hotel>> findByCountry(Integer country_id);
 
+    Optional<Hotel> findByName(String name);
+
 
 }

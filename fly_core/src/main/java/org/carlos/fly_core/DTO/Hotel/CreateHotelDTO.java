@@ -27,7 +27,7 @@ public class CreateHotelDTO {
 
     @NotBlank(message = "Logo cannot be empty")
     @NotNull(message = "Logo cannot be null")
-    private String logo;
+    private MultipartFile logo;
 
     @NotNull(message = "Stars cannot be null")
     private Integer stars;

@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Table(name = "hotel")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,6 +35,9 @@ public class Hotel {
     private String phone;
 
     private String logo;
+
+    @ElementCollection
+    private List<String> images = new ArrayList<>();
 
     private Integer stars;
 }

@@ -19,6 +19,7 @@ public class BranchCreationDTO {
     @NotBlank(message = "The Description is required")
     private String description;
 
+
     private byte[] logo;
 
     @NotNull(message = "The name is required")

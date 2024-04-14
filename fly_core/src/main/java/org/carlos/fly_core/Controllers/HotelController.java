@@ -7,6 +7,7 @@ import org.carlos.fly_core.Models.Hotel;
 import org.carlos.fly_core.Services.HotelService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -51,11 +52,29 @@ public class HotelController {
         }
     }
 
+    @PutMapping("/{hotel_id}/images")
+    public ResponseEntity<Hotel> addImages(
+            @PathVariable Integer hotel_id,
+            @RequestParam List<MultipartFile> images
+    ) {
+        try{
+            return ResponseEntity.ok(hotelService.uploadHotelImages(hotel_id, images));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+
     @PostMapping("/create")
     public ResponseEntity<Hotel> createHotel(
             @RequestBody @Valid CreateHotelDTO hotel
     ) {
-        return ResponseEntity.ok(hotelService.createHotel(hotel));
+        try{
+            return ResponseEntity.ok(hotelService.createHotel(hotel));
+        }catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
 
