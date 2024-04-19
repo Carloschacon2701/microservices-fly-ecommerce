@@ -43,4 +43,6 @@ public class Reservation {
     private Integer children;
 
     private Double totalPrice;
+
+    private Boolean paid;
 }

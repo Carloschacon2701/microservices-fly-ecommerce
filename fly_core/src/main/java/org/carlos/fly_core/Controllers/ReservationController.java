@@ -17,12 +17,17 @@ public class ReservationController {
     @GetMapping("/{id}")
     public ResponseEntity<Reservation> getReservation(@PathVariable Integer id) {
         return ResponseEntity.ok(reservationService.getReservation(id));
-
     }
 
     @PostMapping
     public ResponseEntity<Reservation> createReservation(@Valid @RequestBody ReservationCreationDTO reservation) {
         return ResponseEntity.ok(reservationService.createReservation(reservation));
+    }
+
+
+    @PutMapping("/{id}/pay")
+    public ResponseEntity<Reservation> payReservation(@PathVariable Integer id) {
+        return ResponseEntity.ok(reservationService.payReservation(id));
     }
 
 

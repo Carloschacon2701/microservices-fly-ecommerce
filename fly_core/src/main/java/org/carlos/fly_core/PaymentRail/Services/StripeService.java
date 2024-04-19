@@ -10,8 +10,6 @@ import org.carlos.fly_core.PaymentRail.DTO.StripeChargeDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -27,26 +25,24 @@ public class StripeService {
     }
 
 
-     public PaymentIntent charge(StripeChargeDTO request){
+     public boolean charge(StripeChargeDTO request){
          try{
+             PaymentIntentCreateParams params = PaymentIntentCreateParams
+                     .builder()
+                     .setAmount((long) (request.getAmount() * 100))
+                     .setCurrency("usd")
+                     .setDescription(request.getMessage())
+                     .setPaymentMethod("pm_card_visa")
+                     .setAutomaticPaymentMethods(
+                             PaymentIntentCreateParams.AutomaticPaymentMethods.builder()
+                                     .setEnabled(true)
+                                     .setAllowRedirects(PaymentIntentCreateParams.AutomaticPaymentMethods.AllowRedirects.NEVER).build()
+                     )
+                     .build();
 
-             Map<String, Object> params = new HashMap<>();
-             params.put("amount", (long) (request.getAmount() * 100));
-             params.put("currency", "usd");
-             params.put("description", "Charge for " + request.getUsername());
-             params.put("payment_method", "pm_card_visa");
+        PaymentIntent result = PaymentIntent.create(params).confirm();
 
-             Map<String, Object> automaticPaymentMethods = new HashMap<>();
-             automaticPaymentMethods.put("enabled", true);
-             automaticPaymentMethods.put("allow_redirects", "never");
-             params.put("automatic_payment_methods", automaticPaymentMethods);
-
-             PaymentIntent paymentIntent = PaymentIntent.create(params);
-
-             paymentIntent.confirm();
-
-                return paymentIntent;
-
+        return result.getStatus().equals("succeeded");
 
          }catch (StripeException e){
              System.out.println(e.getMessage());

@@ -29,5 +29,5 @@ public class ReservationStatus {
     @JoinColumn(name = "status_id")
     private Status status;
 
-    private Date created_at = new Date();
+    private Date created = new Date();
 }
