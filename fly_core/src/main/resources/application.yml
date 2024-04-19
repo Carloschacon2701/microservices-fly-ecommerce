@@ -24,3 +24,5 @@ application:
       clientID: 60ju9142ci98161a0mn83n140
   s3:
     bucketName: myecommercefile
+  stripe:
+    api_key: sk_test_51P74UGGMm2GEBEWlIiA8rrvMFvzD9oLyxUFveKdNUc0EhT2nLd3Wh9glkTsKQY6KRhXTm6fLo5QVSF3Axz3e1cM9000BPR4zLm
